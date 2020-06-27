@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  postgres:
+      container_name: my-postgres
+      image: postgres:11
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=ffmemo
+        - POSTGRES_PASSWORD=ffmemo_0831
+        - POSTGRES_DB=ffmemo
+      volumes:
+        - ./postgres/initdb:/docker-entrypoint-initdb.d

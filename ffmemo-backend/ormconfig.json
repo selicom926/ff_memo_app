@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "192.168.99.100",
+    "port": 5432,
+    "username": "ffmemo",
+    "password": "ffmemo_0831",
+    "database": "ffmemo",
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": true
+  }
