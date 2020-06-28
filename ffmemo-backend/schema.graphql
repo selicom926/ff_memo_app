@@ -9,10 +9,16 @@ type Memo {
   content: String!
 }
 
+type Mcategory {
+  id: Float!
+  name: String!
+}
+
 type Query {
   memos: [Memo!]!
   memosInDB: [Memo!]!
   memo(id: Int!): Memo!
+  mcategories: [Mcategory!]!
 }
 
 type Mutation {

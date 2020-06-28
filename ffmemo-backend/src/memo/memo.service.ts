@@ -1,18 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Memo } from './memo.entity';
+import { Memo, Mcategory } from './memo.entity';
 import { MemoInput } from 'src/memo.input';
 
 @Injectable()
 export class MemoService {
     constructor(
         @InjectRepository(Memo)
-        private memoRepository: Repository<Memo>
+        private memoRepository: Repository<Memo>,
+        
+        @InjectRepository(Mcategory)
+        private mcategoryRepository: Repository<Mcategory>
     ) {}
 
     findAll(): Promise<Memo[]> {
         return this.memoRepository.find();
+    }
+
+    findAllCategory(): Promise<Mcategory[]> {
+        return this.mcategoryRepository.find();
     }
   
     findOne(id: number): Promise<Memo> {
@@ -34,5 +41,5 @@ export class MemoService {
         await this.memoRepository.insert(input);
 
         return input;
-    }    
+    }
 }

@@ -1,5 +1,5 @@
 import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
-import { Memo } from './memo.entity';
+import { Memo, Mcategory } from './memo.entity';
 import { MemoService } from './memo.service';
 import { MemoInput } from 'src/memo.input';
 
@@ -31,6 +31,11 @@ export class MemoResolver {
     @Query(returns => Memo)
     async memo(@Args('id', {type: () => Int}) id: number): Promise<Memo> {
         return this.memoService.findOne(id);
+    }
+
+    @Query(returns => [Mcategory])
+    async mcategories(): Promise<Mcategory[]> {
+        return this.memoService.findAllCategory();
     }
 
     @Mutation(returns => Memo)
