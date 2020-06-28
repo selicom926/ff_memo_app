@@ -39,10 +39,10 @@ export default class CategoryList extends React.Component<ICategoryListProps> {
                     const categories: [Mcategory] = data.mcategories;
 
                     return (
-                        <ul>
+                        <ul className={'categorylist_base'}>
                             {categories.map((category: Mcategory) => {
                                 return <li key={category.id} onClick={() => {this._handleClick(category.id)}}>
-                                    <Link to={`/memo/${category.id}`} >{category.name}</Link>
+                                    <Link to={`/memo/${category.id}`} className={'categorylist_link'} >{category.name}</Link>
                                 </li>
                             })}
                         </ul>

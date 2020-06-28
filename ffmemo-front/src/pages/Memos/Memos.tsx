@@ -26,7 +26,7 @@ export default class Memos extends React.Component<IMemosProps, IMemosStates> {
     componentDidUpdate(prevProps: Readonly<IMemosProps>, prevState: Readonly<IMemosStates>) {
         if (prevState.categoryId !== this.state.categoryId) {
             const query = gql`query {
-                memosInDB {
+                memosByCategoryId(categoryId: ${this.state.categoryId}) {
                     id
                     categoryId
                     title
@@ -35,8 +35,9 @@ export default class Memos extends React.Component<IMemosProps, IMemosStates> {
             }`
 
             userClient().query({query}).then(
-                (result: ApolloQueryResult<Array<Memo>>) => {
-                    const data = result.data;
+                (result: ApolloQueryResult<any>) => {
+                    
+                    const data = result.data.memosByCategoryId;
 
                     this.setState({
                         memos: data
@@ -67,6 +68,14 @@ export default class Memos extends React.Component<IMemosProps, IMemosStates> {
             <div>
                 {this.state.error}
                 Memos {this.props.match.params.categoryId}
+                {this.state.memos.map((memo: Memo) => {
+                    return (
+                        <section>
+                            <h1>{memo.title}</h1>
+                            <div>{memo.content}</div>
+                        </section>
+                    )
+                })}
             </div>
         );
     }
