@@ -35,18 +35,6 @@ export class Mtag {
 
 @ObjectType()
 @Entity()
-export class Mcategory {
-    @Field()
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Field()
-    @Column()
-    name: string;
-}
-
-@ObjectType()
-@Entity()
 export class MtagRelation {
     @Field()
     @PrimaryGeneratedColumn()

@@ -1,16 +1,7 @@
 import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
-import { Memo, Mcategory } from './memo.entity';
+import { Memo } from './memo.entity';
 import { MemoService } from './memo.service';
 import { MemoInput } from 'src/memo.input';
-
-const memoTable: [Memo] = [
-    {
-        id: 1,
-        categoryId: 1,
-        title: 'aaa',
-        content: 'aaa'
-    },
-]
 
 @Resolver('Memo')
 export class MemoResolver {
@@ -20,22 +11,17 @@ export class MemoResolver {
 
     @Query(returns => [Memo])
     async memos(): Promise<Memo[]> {
-        return memoTable;
+        return this.memoService.findAll();
     }
 
     @Query(returns => [Memo])
-    async memosInDB(): Promise<Memo[]> {
-        return this.memoService.findAll();
+    async memosByCategoryId(@Args('categoryId', {type: () => Int}) categoryId: number): Promise<Memo[]> {
+        return this.memoService.findByCategory(categoryId);
     }
 
     @Query(returns => Memo)
     async memo(@Args('id', {type: () => Int}) id: number): Promise<Memo> {
         return this.memoService.findOne(id);
-    }
-
-    @Query(returns => [Mcategory])
-    async mcategories(): Promise<Mcategory[]> {
-        return this.memoService.findAllCategory();
     }
 
     @Mutation(returns => Memo)

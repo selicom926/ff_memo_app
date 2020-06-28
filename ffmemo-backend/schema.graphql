@@ -16,7 +16,7 @@ type Mcategory {
 
 type Query {
   memos: [Memo!]!
-  memosInDB: [Memo!]!
+  memosByCategoryId(categoryId: Int!): [Memo!]!
   memo(id: Int!): Memo!
   mcategories: [Mcategory!]!
 }
